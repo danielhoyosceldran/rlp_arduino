@@ -23,6 +23,10 @@ int* parseStringToArray(String input) {
 }
 
 // Serial Reader
+/*
+Protocol:
+
+*/
 void readSerial() {
   // Check if there are values inside the buffer.
   if (Serial.available() > 0) {
@@ -42,7 +46,6 @@ void readSerial() {
       Serial.print("Value: ");
       Serial.println(value);
       lastValue = value;
-
     }
   }
 }

@@ -14,8 +14,17 @@ void setup() {
   semaphore = true;
   
   setToZero();
+  pinMode(7, OUTPUT);
 }
 
 void loop() {
-  readSerial();
+  if (Serial.available() > 0) {
+    String msg = Serial.readString();
+    if (msg == "ON") {
+      tone(7, 2000, 100);
+    }
+    else {
+      digitalWrite(7, LOW);
+    }
+  }
 }

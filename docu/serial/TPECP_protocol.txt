@@ -1,0 +1,17 @@
+El protocol que utilitzaran la IA i el TurkProEvolutionChess es diu: TPECP o Tepecpe per al amics :)
+
+El missatge de IA -> TurkProEvolutionChess ha de poder contenir:
+- Posició inicial.
+- Posició final.
+- Emoció que comporta el moviment (si en té) / gest que ha de fer.
+
+El robot pot enviar confirmació d'haver rebut el missatge sencer:
+- Si envia el missatge és correcte (format nms) envia OK.
+- Si no ho és no envia res.
+- Si la IA no rep confirmació en 5 segons, torna a enviar el missatge.
+
+El format del missatge serà el seguent:
+xInicial yInicial xFinal yFinal emoció
+(0-7) (0-7) (0-7) (0-7) (0-9)
+
+El missatge robot->IA serà: "1" no pot ser 0 peruqè per defecte al serial hi ha un 0. 

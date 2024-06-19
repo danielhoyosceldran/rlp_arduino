@@ -17,5 +17,5 @@ void setup() {
 }
 
 void loop() {
-  readSerial_coordinates();
+  readSerial();
 }

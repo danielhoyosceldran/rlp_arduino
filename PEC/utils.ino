@@ -42,10 +42,7 @@ void readSerial() {
       Serial.print("Value: ");
       Serial.println(value);
       lastValue = value;
-      
-      servo3.write(0);
-      delay(1000);
-      servo3.write(90);
+
     }
   }
 }

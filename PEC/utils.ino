@@ -88,3 +88,15 @@ void readSerial_coordinates() {
     currentValueIndex = 0;
   }
 }
+
+void readSerialBasic() {
+  if (Serial.available() > 0) {
+    String msg = Serial.readString();
+    if (msg == "21348") {
+      tone(7, 2000, 100);
+    }
+    else {
+      digitalWrite(7, LOW);
+    }
+  }
+}

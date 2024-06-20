@@ -18,13 +18,5 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    String msg = Serial.readString();
-    if (msg == "ON") {
-      tone(7, 2000, 100);
-    }
-    else {
-      digitalWrite(7, LOW);
-    }
-  }
+  
 }

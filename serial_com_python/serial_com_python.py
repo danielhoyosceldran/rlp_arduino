@@ -10,9 +10,10 @@ s.port = 'COM3'
 s.open()
 
 while True:
-    command = input("command: ")
+    command = '21348'
+    print(type(command))
     s.write(command.encode('utf-8'))
     if command == 'exit':
         s.close()
         exit()
-        
+    input("command: ")

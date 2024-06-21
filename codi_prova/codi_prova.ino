@@ -14,11 +14,11 @@ void setup() {
   s_colze.attach(colze);
 
   // buzzer
-  pinMode(11, HIGH);
   tone(11, 600, 200);
 
   // led
-  pinMode(8, HIGH);
+  pinMode(8, OUTPUT);
+  digitalWrite(8, HIGH);
 
   s_espatlla.write(90);
   s_colze.write(90);
@@ -27,7 +27,7 @@ void setup() {
   //s_colze.write(180);
   delay(500);
 
-  pinMode(8, LOW);
+  digitalWrite(8, LOW);
 }
 
 void loop() {

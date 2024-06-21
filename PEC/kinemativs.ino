@@ -1,8 +1,8 @@
 #include <Math.h>
 
 // Longitudes de los segmentos del brazo
-const float L1 = 3.0;
-const float L2 = 2.0;
+const float L1 = 15.0;
+const float L2 = 26.0;
 
 // Función para calcular la cinemática inversa
 void inverseKinematics(float x, float y, float &theta1, float &theta2) {

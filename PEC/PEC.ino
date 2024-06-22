@@ -21,20 +21,24 @@ void setup() {
   
   // Valores de prueba
   float x = 0.0;
-  float y = 8.0;
-  float theta1, theta2;
-  
+  float y = 40;
+  float theta1 = 0, theta2 = 0;
+
   // Calcular los ángulos
-  inverseKinematics(x, y, theta1, theta2);
+  inverseKinematics_0(x, y, theta1, theta2);
   
   // Imprimir los resultados
-  Serial.print("θ1: ");
-  Serial.print(theta1);
-  Serial.println(" grados");
+  Serial.println("0: ")
+  Serial.print("θ1: "); Serial.print(theta1);
+  Serial.print("θ2: "); Serial.print(theta2);
   
-  Serial.print("θ2: ");
-  Serial.print(theta2);
-  Serial.println(" grados");
+  // Calcular los ángulos
+  inverseKinematics_1(x, y, theta1, theta2);
+  
+  // Imprimir los resultados
+  Serial.println("1: ")
+  Serial.print("θ1: "); Serial.print(theta1);
+  Serial.print("θ2: "); Serial.print(theta2);
 }
 
 void loop() {

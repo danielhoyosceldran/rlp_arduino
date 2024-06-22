@@ -70,7 +70,7 @@ double radiansToDegrees(double radianes)
 }
 
 // x i y, posicions; a1 i a2, angles (els passem com a 0)
-void inversekinematiks_1(double x, double y, double& a1, double& a2)
+void inverseKinematics_1(double x, double y, double& a1, double& a2)
 {
   double dist = distance(x, y);
   // Si estem fora del rang d'acció, el braç ens dona l'esquena.

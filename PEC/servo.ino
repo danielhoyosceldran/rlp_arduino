@@ -5,6 +5,11 @@ Servo elbow, shoulder;
 int _currentElbowAngle;
 int _currentShoulderAngle;
 
+void setup_servos() {
+  elbow.attach(9);
+  shoulder.attach(10);
+}
+
 void updateCurrentElbowAngle(int a) {
   _currentElbowAngle = a;
 }

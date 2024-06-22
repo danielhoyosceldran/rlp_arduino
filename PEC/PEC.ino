@@ -8,12 +8,13 @@ int currentValueIndex = 0;
 
 void setup() {
   Serial.begin(9600);
+  setup_servos();
 
   lastValue = -1;
   value = 0;
   semaphore = true;
   
-  setToZero();
+ // setToZero();
   pinMode(7, OUTPUT);
 
   // Inicializar la comunicación serial
@@ -28,15 +29,19 @@ void setup() {
   inverseKinematics_0(x, y, theta1, theta2);
   
   // Imprimir los resultados
-  Serial.println("0: ")
+  Serial.println("0: ");
   Serial.print("θ1: "); Serial.print(theta1);
   Serial.print("θ2: "); Serial.print(theta2);
   
+  double xd = 0.0;
+  double yd = 40;
+  double theta1d = 0, theta2d = 0;
+
   // Calcular los ángulos
-  inverseKinematics_1(x, y, theta1, theta2);
+  inverseKinematics_1(xd, yd, theta1d, theta2d);
   
   // Imprimir los resultados
-  Serial.println("1: ")
+  Serial.println("1: ");
   Serial.print("θ1: "); Serial.print(theta1);
   Serial.print("θ2: "); Serial.print(theta2);
 }

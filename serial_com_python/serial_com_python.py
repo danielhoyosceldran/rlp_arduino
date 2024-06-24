@@ -24,7 +24,6 @@ s.open()
 
 while True:
     command = input()
-    print(type(command))
     s.write(command.encode('utf-8'))
     if command == 'exit':
         s.close() # so important.

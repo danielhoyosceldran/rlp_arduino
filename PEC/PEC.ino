@@ -25,13 +25,11 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    String command = Serial.readString();
-    Serial.println(command);
-    if (command == "hola") {
-      setStatusLed(1);
-      delay(1000);
-      setStatusLed(0);
-    }
-  }
+  String command = readSerial();
+  setStatusLed(2);
+  int* logicalCoordinates = parseMessage(command);
+  int* realCoordinates = logicalToRealCoordinates(logicalCoordinates);
+  // NO ES PODEN CARREGAR LES COORDENADES, PER ALGUN MOTIU
+  delay(1000);
+  moveTo(23, 23);
 }

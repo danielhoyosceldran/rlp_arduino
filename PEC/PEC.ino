@@ -22,7 +22,6 @@ void setup() {
 
   setup_servos();
   setToZero();
-  
 }
 
 void loop() {

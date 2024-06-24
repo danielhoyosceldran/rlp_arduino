@@ -1,10 +1,10 @@
 #include <Servo.h>
 #include <math.h>
 
-double largo1 = 20;
-double largo2 = 20;
+double upperLimb = 20;
+double forearm = 20;
 double angulo1,angulo2;
-double Pi = 3.14159;
+double PI = 3.14159;
 
 
 // Funcion LeyDelCoseno
@@ -38,7 +38,7 @@ double distance(double x, double y)
 // esta funcion convierte angulos en radianes a grados
 double radiansToDegrees(double radianes)
 {
-  return radianes * 180.0 / Pi;
+  return radianes * 180.0 / PI;
 }
 
 // Funcion angulosMotores
@@ -61,13 +61,13 @@ void angulosMotores(double x, double y, double& a1, double& a2)
   double D1 = atan2(y, x);
   Serial.print("D1: ");
   Serial.println(D1);
-  double D2 = cos(dist, largo1, largo2);
+  double D2 = cos(dist, upperLimb, forearm);
   Serial.print("D2: ");
   Serial.println(D2);
   double a1Radianes = D1 + D2;
   Serial.print("a1Radianes: ");
   Serial.println(a1Radianes);
-  double a2Radianes = cos(largo1, largo2, dist);
+  double a2Radianes = cos(upperLimb, forearm, dist);
   Serial.print("a2Radianes: ");
   Serial.println(a2Radianes);
  

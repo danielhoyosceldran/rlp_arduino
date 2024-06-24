@@ -67,6 +67,7 @@ void updateShoulder(int deg) {
   }
 }
 
+// good example position: 0, 23 (23 = minimum value for "y")
 void moveTo(double x, double y) {
   Serial.print("Move to ("); Serial.print(x); Serial.print(", "); Serial.print(y); Serial.println(")");
   double alfa = 0, beta = 0;
@@ -77,4 +78,18 @@ void moveTo(double x, double y) {
 
   updateShoulder(alfa);
   updateElbow(beta);
+}
+
+void moveFinger(int direction) {
+  setStatusLed(1);
+  switch(direction) {
+    case 0:
+      finger.write(20);
+    break;
+    case 1:
+      finger.write(0);
+    break;
+  }
+  delay(800);
+  setStatusLed(0);
 }

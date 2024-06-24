@@ -5,7 +5,7 @@ Servo s_espatlla;
 Servo s_colze;
 
 // Pin on està connectat el servo
-const int espatlla = 9;
+const int espatlla = 2;
 const int colze = 10;
 
 void setup() {
@@ -20,10 +20,8 @@ void setup() {
   pinMode(8, OUTPUT);
   digitalWrite(8, HIGH);
 
-  s_espatlla.write(90);
-  s_colze.write(90);
-  delay(3000);
-  s_espatlla.write(0);
+  s_espatlla.write(30);
+  //s_colze.write(90);
   //s_colze.write(180);
   delay(500);
 

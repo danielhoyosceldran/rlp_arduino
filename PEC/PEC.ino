@@ -1,3 +1,6 @@
+#define STATUS_LED 8
+#define BUZZER 11
+
 int value;
 int lastValue;
 bool semaphore;
@@ -7,45 +10,29 @@ int values[maxValues];
 int currentValueIndex = 0;
 
 void setup() {
-  Serial.begin(9600);
-  setup_servos();
+  tone(BUZZER, 600, 200);
+  pinMode(STATUS_LED, OUTPUT);
 
   lastValue = -1;
   value = 0;
   semaphore = true;
-  
- // setToZero();
-  pinMode(7, OUTPUT);
 
-  // Inicializar la comunicación serial
   Serial.begin(9600);
-  
-  // Valores de prueba
-  float x = 0.0;
-  float y = 40;
-  float theta1 = 0, theta2 = 0;
+  delay(1000);
 
-  // Calcular los ángulos
-  inverseKinematics_0(x, y, theta1, theta2);
+  setup_servos();
+  setToZero();
   
-  // Imprimir los resultados
-  Serial.println("0: ");
-  Serial.print("θ1: "); Serial.print(theta1);
-  Serial.print("θ2: "); Serial.print(theta2);
-  
-  double xd = 0.0;
-  double yd = 40;
-  double theta1d = 0, theta2d = 0;
-
-  // Calcular los ángulos
-  inverseKinematics_1(xd, yd, theta1d, theta2d);
-  
-  // Imprimir los resultados
-  Serial.println("1: ");
-  Serial.print("θ1: "); Serial.print(theta1);
-  Serial.print("θ2: "); Serial.print(theta2);
 }
 
 void loop() {
-  
+  if (Serial.available() > 0) {
+    String command = Serial.readString();
+    Serial.println(command);
+    if (command == "hola") {
+      setStatusLed(1);
+      delay(1000);
+      setStatusLed(0);
+    }
+  }
 }

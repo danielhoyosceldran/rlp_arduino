@@ -1,13 +1,21 @@
 #include <Adafruit_MotorShield.h>
 #include <Servo.h>
-Servo elbow, shoulder;
+Servo elbow, shoulder, finger;
+
+#define FINGER 2
+#define SHOULDER 9
+#define ELBOW 10
 
 int _currentElbowAngle;
 int _currentShoulderAngle;
 
 void setup_servos() {
-  elbow.attach(9);
-  shoulder.attach(10);
+  Serial.println("Setting up servos...");
+  finger.attach(FINGER);
+  shoulder.attach(SHOULDER);
+  elbow.attach(ELBOW);
+  delay(1000); // time to prepare servos
+  Serial.println("Servos ready.");
 }
 
 void updateCurrentElbowAngle(int a) {
@@ -18,46 +26,55 @@ void updateCurrentShoulderAngle(int a) {
   _currentShoulderAngle = a;
 }
 
-int getElbowAngle() { return _currentElbowAngle; }
-int getShoulderAngle() { return _currentShoulderAngle; }
+int getElbowAngle() { 
+  return _currentElbowAngle;
+}
 
-void setToZero(){
-  elbow.write(0);
-  shoulder.write(0);
-
-  updateCurrentElbowAngle(0);
-  updateCurrentShoulderAngle(0);
+int getShoulderAngle() {
+  return _currentShoulderAngle;
 }
 
 void setElbowToZero() {
-  elbow.write(0);
-  updateCurrentElbowAngle(0);
+  updateElbow(90);
 }
 
 void setShoulderToZero() {
-  shoulder.write(0);
-  updateCurrentShoulderAngle(0);
+  updateShoulder(90);
 }
 
-/*
-void incElbow(int deg) {
-  if (deg >= 0 && deg <= 180) {
-    elbow.write(_currentElbowAngle + deg);
-    updateCurrentElbowAngle(deg);
-  }
+void setToZero(){
+  setShoulderToZero();
+  setElbowToZero();
 }
- */
 
 void updateElbow(int deg) {
   if (deg >= 0 && deg <= 180) {
+    setStatusLed(1);
     elbow.write(deg);
     updateCurrentElbowAngle(deg);
+    delay(800);
+    setStatusLed(0);
   }
 }
 
 void updateShoulder(int deg) {
   if (deg >= 0 && deg <= 180) {
+    setStatusLed(1);
     shoulder.write(deg);
     updateCurrentShoulderAngle(deg);
+    delay(800);
+    setStatusLed(0);
   }
+}
+
+void moveTo(double x, double y) {
+  Serial.print("Move to ("); Serial.print(x); Serial.print(", "); Serial.print(y); Serial.println(")");
+  double alfa = 0, beta = 0;
+  inverseKinematics(x, y, alfa, beta);
+  // print results
+  Serial.print("alfa: "); Serial.println(alfa);
+  Serial.print("beta: "); Serial.println(beta);
+
+  updateShoulder(alfa);
+  updateElbow(beta);
 }

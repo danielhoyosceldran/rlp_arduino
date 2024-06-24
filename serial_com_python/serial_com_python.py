@@ -2,18 +2,30 @@
 # pip install pyserial
 
 import serial
-import time
+import serial.tools.list_ports
 
 s = serial.Serial()
 s.baundrate = 96000
-s.port = 'COM3'
+
+# choose port
+ports = serial.tools.list_ports.comports()
+
+if ports:
+    print("Ports serial disponibles:")
+    for port in ports:
+        print(f"- {port.device}: {port.description}")
+else:
+    print("No s'han trobat ports serial disponibles.")
+
+s.port = input("Port: ")
+
+# start communication
 s.open()
 
 while True:
-    command = '21348'
+    command = input()
     print(type(command))
     s.write(command.encode('utf-8'))
     if command == 'exit':
-        s.close()
+        s.close() # so important.
         exit()
-    input("command: ")

@@ -1,26 +1,5 @@
 // Parser
-void parseStringToIntArray(String str, char delimiter, int* arr, int arrSize) {
-  int currentIndex = 0;
-  int previousIndex = 0;
-  int arrIndex = 0;
 
-  while (currentIndex < str.length() && arrIndex < arrSize) {
-    currentIndex = str.indexOf(delimiter, previousIndex);
-    if (currentIndex == -1) {
-      currentIndex = str.length();
-    }
-    String part = str.substring(previousIndex, currentIndex);
-    arr[arrIndex] = part.toInt();
-    previousIndex = currentIndex + 1;
-    arrIndex++;
-  }
-}
-
-int* parseStringToArray(String input) {
-  static int resultArray[4];  // Array estático para almacenar los resultados
-  parseStringToIntArray(input, ',', resultArray, 4);
-  return resultArray;
-}
 
 // Serial Reader
 void readSerial() {
@@ -98,5 +77,24 @@ void readSerialBasic() {
     else {
       digitalWrite(7, LOW);
     }
+  }
+}
+
+// leds
+void setStatusLed(int status) {
+  switch(status) {
+    case 0: digitalWrite(8, LOW);
+    break;
+    case 1: digitalWrite(8, HIGH);
+    break;
+    case 2: 
+      digitalWrite(8, HIGH);
+      delay(200);
+      digitalWrite(8, LOW);
+      delay(200);
+      digitalWrite(8, HIGH);
+      delay(200);
+      digitalWrite(8, LOW);
+    break;
   }
 }

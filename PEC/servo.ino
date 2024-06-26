@@ -84,10 +84,10 @@ void moveFinger(int direction) {
   setStatusLed(1);
   switch(direction) {
     case 0:
-      finger.write(20);
+      finger.write(60);
     break;
     case 1:
-      finger.write(0);
+      finger.write(5);
     break;
   }
   delay(800);

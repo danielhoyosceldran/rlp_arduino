@@ -1,23 +1,41 @@
 // Parser
-#define COMMAND_LENGHT 4
-int* parseMessage(String command) {
-  int coordinates[COMMAND_LENGHT];
+void parseMessage(String command, int* coordinates) {
   for (int i = 0; i < command.length(); i++) {
     char coordinateChar = command.charAt(i);
     int coordinate = coordinateChar - '0';
     coordinates[i] = coordinate;
   }
-  return coordinates;
 }
 
-int logicalToRealCoordinates(int* logicalCoordinates) {
-  int realCoordinates[COMMAND_LENGHT];
-  for (int i = 0; i < COMMAND_LENGHT; i++) {
-    realCoordinates[i] = 23;
+void parseMessageDegrees(String command, double &alpha, double &beta) {
+  for (int i = 0; i < command.length(); i++) {
+    
   }
-  return realCoordinates;
 }
 
+void logicalToRealCoordinates(int* coordinates, double* realCoordinates) {
+/*  double equivalnces[8][8] = 
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [], 
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [];*/
+
+    realCoordinates[0] = 23;
+    realCoordinates[1] = 23;
+    realCoordinates[2] = -23;
+    realCoordinates[3] = 23;
+}
+
+void commandParser(String command, double* realCoordinates) {
+  int coordinates[COMMAND_LENGHT];
+  parseMessage(command, coordinates);
+
+  logicalToRealCoordinates(coordinates, realCoordinates);
+}
 
 // Serial Reader
 String readSerial() {

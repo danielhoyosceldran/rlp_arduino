@@ -9,52 +9,32 @@ int currentValueIndex = 0;
 
 void setup() {
   Serial.begin(9600);
-  delay(1000);
-/*
-  tone(BUZZER, 600, 200);
-  pinMode(STATUS_LED, OUTPUT);
+  delay(100);
 
-  setup_servos();
-  setToZero();
-  moveFinger(0);
-  delay(1000);
-  moveTo(23, 0);*/
-  
+  //tone(BUZZER, 600, 200);
+  //pinMode(STATUS_LED, OUTPUT);
   setup_servos();
   delay(500);
-  double a1 = 98;
-  double a2 = 37;
-  updateShoulder(a1);
-  updateElbow(a2);
-  double x = 0;
-  double y = 0;
-  kinematics(a1, a2, x, y);
-  Serial.println("");
-  Serial.print("a1: "); Serial.println(a1);
-  Serial.print("a2: "); Serial.println(a2);
-  Serial.print("x: "); Serial.println(x);
-  Serial.print("y: "); Serial.println(y);
-
-  a1 = 0;
-  a2 = 0;
-
-  inverseKinematics(0, 0, a1, a2);
-  Serial.println("inverse:");
-  Serial.print("a1: "); Serial.println(a1);
-  Serial.print("a2: "); Serial.println(a2);
-
 }
 
 void loop() {
-  /*String command = readSerial();
-  double realCoordinates[COMMAND_LENGHT];
-  commandParser(command, realCoordinates);
+  String command = readSerial();
+  commandParser(command);
+
   
-  // NO ES PODEN CARREGAR LES COORDENADES, PER ALGUN MOTIU
-  delay(1000);
-  moveTo(realCoordinates[0], realCoordinates[1]);
-  delay(1000);
-  moveTo(realCoordinates[2], realCoordinates[3]);*/
-
-
+  /*if (Serial.available() > 0) {
+    String input = Serial.readStringUntil('\n');  // Llegeix la cadena fins al final de línia
+    Serial.println(input);
+    double num1, num2;
+    if (parseDoubles(input, num1, num2)) {
+      Serial.print("Primer número: ");
+      Serial.println(num1, 2);  // 2 decimals per mostrar
+      Serial.print("Segon número: ");
+      Serial.println(num2, 2);  // 2 decimals per mostrar
+      updateShoulder(num1);
+      updateElbow(num2);
+    } else {
+      Serial.println("Error en la cadena d'entrada.");
+    }
+  }*/
 }

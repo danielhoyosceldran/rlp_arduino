@@ -49,21 +49,15 @@ void setToZero(){
 
 void updateElbow(int deg) {
   if (deg >= 0 && deg <= 180) {
-    setStatusLed(1);
     elbow.write(deg);
     updateCurrentElbowAngle(deg);
-    delay(800);
-    setStatusLed(0);
   }
 }
 
 void updateShoulder(int deg) {
   if (deg >= 0 && deg <= 180) {
-    setStatusLed(1);
     shoulder.write(deg);
     updateCurrentShoulderAngle(deg);
-    delay(800);
-    setStatusLed(0);
   }
 }
 
@@ -80,16 +74,27 @@ void moveTo(double x, double y) {
   updateElbow(beta);
 }
 
-void moveFinger(int direction) {
-  setStatusLed(1);
-  switch(direction) {
-    case 0:
-      finger.write(60);
-    break;
-    case 1:
-      finger.write(5);
-    break;
-  }
-  delay(800);
-  setStatusLed(0);
+void updateFinger(int a) {
+  finger.write(a);
+}
+
+
+void moves(int row, int col) {
+  int matrix[8][8][3] = {
+    {{82, 90, 16}, {84, 94, 10}, {90, 88, 10}, {85, 100, 9}, {90, 103, 9}, {96, 90, 10}, {100, 100, 10}, {112, 90, 16}},
+    {{82, 90, 16}, {84, 94, 10}, {84, 94, 10}, {84, 94, 10}, {84, 94, 10}, {84, 94, 10}, {84, 94, 10}, {116, 90, 8}},
+    {{70, 115, 8}, {70, 115, 8}, {60, 144, 0}, {60, 144, 0}, {80, 120, 0}, {80, 120, 0}, {83, 130, 0}, {83, 130, 0}},
+    {{70, 115, 8}, {70, 115, 8}, {50, 154, 0}, {60, 148, 0}, {80, 120, 0}, {80, 120, 0}, {83, 130, 0}, {83, 130, 0}},
+    {{31, 170, 11}, {31, 170, 11}, {50, 154, 0}, {60, 148, 0}, {60, 148, 0}, {70, 148, 0}, {70, 160, 0}, {70, 160, 0}},
+    {{30, 173, 0}, {30, 173, 0}, {30, 180, 0}, {40, 180, 0}, {40, 180, 0}, {70, 148, 0}, {70, 160, 0}, {70, 160, 0}},
+    {{15, 180, 0}, {20, 180, 0}, {20, 180, 0}, {40, 180, 0}, {40, 180, 0}, {52, 178, 0}, {1, 172,  10}, {1, 172,  10}},
+    {{15, 180, 0}, {20, 180, 0}, {20, 180, 0}, {20, 180, 0}, {20, 180, 0}, {20, 180, 0}, {1, 172,  10}, {1, 172,  10}}
+  };
+  updateShoulder(180);
+  updateElbow(0);
+  delay(1500);
+  updateFinger(matrix[row][col][2]);
+  updateShoulder(matrix[row][col][0]);
+  updateElbow(matrix[row][col][1]);
+  delay(2800);
 }

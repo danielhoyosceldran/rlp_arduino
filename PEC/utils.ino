@@ -7,25 +7,13 @@ void parseMessage(String command, int* coordinates) {
   }
 }
 
-bool parseDoubles(String input, double &num1, double &num2) {
-  int separatorIndex = input.indexOf(';');
-  
-  if (separatorIndex == -1) {
-    return false;  // No hi ha separador ';'
-  }
-
-  String firstPart = input.substring(0, separatorIndex);
-  String secondPart = input.substring(separatorIndex + 1);
-
-  num1 = firstPart.toDouble();
-  num2 = secondPart.toDouble();
-
-  return true;
-}
 
 void commandParser(String command) {
   int coordinates[COMMAND_LENGHT];
   parseMessage(command, coordinates);
+  for (int i = 0; i <= 4; i++){
+    Serial.println(command[i]);
+  }
   moves(coordinates[0], coordinates[1]);
   moves(coordinates[2], coordinates[3]);
 }
@@ -53,39 +41,31 @@ String readSerial() {
   return command;
 }
 
-String readSerial2() {
-  Serial.println("hola");
-  if (Serial.available() > 0) {
-    String input = Serial.readStringUntil('\n');  // Llegeix la cadena fins al final de línia
-    Serial.println(input);
-    double num1, num2;
-    if (parseDoubles(input, num1, num2)) {
-      Serial.print("Primer número: ");
-      Serial.println(num1, 2);  // 2 decimals per mostrar
-      Serial.print("Segon número: ");
-      Serial.println(num2, 2);  // 2 decimals per mostrar
-    } else {
-      Serial.println("Error en la cadena d'entrada.");
-    }
-  }
+
+void sound() {
+  tone(BUZZER, 600, 200);
 }
 
 // leds
 void setStatusLed(int status) {
   switch(status) {
-    case 0: digitalWrite(8, LOW);
-    break;
-    case 1: digitalWrite(8, HIGH);
-    break;
+    case 0: 
+      digitalWrite(STATUS_LED, LOW);
+      break;
+    case 1:
+      sound();
+      digitalWrite(STATUS_LED, HIGH);
+      break;
     case 2: 
-      digitalWrite(8, HIGH);
+      sound();
+      digitalWrite(STATUS_LED, HIGH);
       delay(200);
-      digitalWrite(8, LOW);
+      digitalWrite(STATUS_LED, LOW);
       delay(200);
-      digitalWrite(8, HIGH);
+      digitalWrite(STATUS_LED, HIGH);
       delay(200);
-      digitalWrite(8, LOW);
-    break;
+      digitalWrite(STATUS_LED, LOW);
+      break;
   }
 }
 
